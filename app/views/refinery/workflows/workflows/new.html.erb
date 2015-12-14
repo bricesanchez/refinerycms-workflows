@@ -1,0 +1,21 @@
+<% content_for :body do %>
+  <div class='workflows'>
+    <%=raw @page.content_for(Refinery::Pages.default_parts.first.to_sym) %>
+
+    <%= form_for [refinery, :workflows, @workflow] do |f| %>
+      <%= render '/refinery/admin/error_messages',
+                 :object => @workflow,
+                 :include_object_name => true  %>
+
+      <div class='field email_field string_field'>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+
+      <div class='actions'>
+        <%= f.submit t('.send') %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<%= render '/refinery/content_page' %>

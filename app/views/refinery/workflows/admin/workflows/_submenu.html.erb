@@ -1,0 +1,22 @@
+<div id='actions'>
+  <ul>
+    <% if ::Refinery::Workflows::Admin::WorkflowsController.searchable? %>
+      <li>
+        <%= render '/refinery/admin/search', :url => refinery.workflows_admin_workflows_path %>
+      </li>
+    <% end %>
+    <li <%= "class='selected'" if params[:action] == "index" %>>
+      <%= link_to t('.inbox'), refinery.workflows_admin_workflows_path, :class => "email_icon" %>
+    </li>
+    <li>
+      <%= link_to t('.update_notified'),
+                    refinery.edit_workflows_admin_setting_path(:workflow_notification_recipients, :dialog => true, :height => 300),
+                    :class => "user_comment_icon" %>
+    </li>
+    <li>
+      <%= link_to t('.edit_confirmation_email'),
+                  refinery.edit_workflows_admin_setting_path(:workflow_confirmation_message, :dialog => true),
+                  :class => "edit_email_icon" %>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,36 @@
+<div id='records'>
+  <h2><%= t('.workflow') %></h2>
+  <table id='workflow' class='workflow'>
+      <tr>
+        <td>
+          <strong>
+            <%= t('.email', :default => t('activerecord.attributes.workflow.email')) %>
+          </strong>
+        </td>
+        <td>
+          <%= @workflow.email %>
+        </td>
+      </tr>
+  </table>
+</div>
+<div id='actions'>
+  <h2><%= t('.details')%></h2>
+  <p>
+    <strong><%= t('.age') %>:</strong> <%= time_ago_in_words(@workflow.created_at) %>
+  </p>
+  <h2><%= t('.actions') %></h2>
+  <ul>
+    <li>
+    <%= link_to t('.back_to_all_workflows'), refinery.workflows_admin_workflows_path,
+                   :class => "back_icon" %>
+    </li>
+    <li>
+      <%= link_to t('delete_workflow', :scope => 'refinery.workflows.admin.workflows.workflow'),
+                  refinery.workflows_admin_workflow_path(@workflow),
+                  :class => 'delete_icon no-tooltip confirm-delete',
+                  :title => t('delete_workflow', :scope => 'refinery.workflows.admin.workflows.workflow'),
+                  :'data-confirm' => t('message', :scope => 'refinery.admin.delete', :title => @workflow.name),
+                  :'data-method' => "delete" %>
+    </li>
+  </ul>
+</div>

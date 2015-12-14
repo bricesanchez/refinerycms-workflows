@@ -1,0 +1,27 @@
+<%= render 'submenu' %>
+<div id='records'>
+  <% if searching? %>
+    <%= link_to t('cancel_search', :scope => 'refinery.admin.search'), refinery.workflows_admin_workflows_path, :class => "cancel-search" %>
+    <h2><%= t('results_for_html', :scope => 'refinery.admin.search', :query => h(params[:search])).html_safe %></h2>
+    <% if @workflows.any? %>
+      <ul>
+        <%= render :partial => 'workflow', :collection => @workflows %>
+      </ul>
+    <% else %>
+      <p><%= t('no_results', :scope => 'refinery.admin.search') %></p>
+    <% end %>
+  <% else %>
+    <% if @grouped_workflows.any? -%>
+      <% @grouped_workflows.each do |container| %>
+        <h3><%= l((workflow_group = container.last).first.created_at) %></h3>
+        <ul>
+          <%= render :partial => 'workflow', :collection => workflow_group %>
+        </ul>
+      <% end %>
+    <% else -%>
+      <p>
+        <strong><%= t('.no_spam') %></strong>
+      </p>
+    <% end -%>
+  <% end %>
+</div>

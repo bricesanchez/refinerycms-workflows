@@ -1,0 +1,50 @@
+<%= form_for @setting, :url => refinery.workflows_admin_setting_path(@setting) do |f| %>
+
+  <p>
+    <%= t('.explanation') %>
+  </p>
+  <p>
+    <%= t('.below_edit_email_sent') %>
+  </p>
+  <table id='workflow'>
+    <tr>
+      <td>
+        <label class='stripped'><%= t('.to') %></label>
+      </td>
+      <td>
+        <%= t('.the_customer_making_workflow') %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label class='stripped'><%= t('.from') %></label>
+      </td>
+      <td>
+        <%= "#{Refinery::Core.site_name} &lt;no-reply@#{request.domain}&gt;".html_safe %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= label_tag "setting[subject[#{locale.to_s}]]", t('.subject'), :class => 'stripped' %>
+      </td>
+      <td>
+        <%= text_field_tag "setting[subject[#{locale.to_s}]]", Refinery::Workflows::Setting.confirmation_subject, :class => 'widest' %>
+      </td>
+    </tr>
+    <tr>
+      <td valign='top'>
+        <%= label_tag "setting[message[#{locale.to_s}]]", t('.message'), :class => 'stripped' %>
+      </td>
+      <td>
+        <%= text_area_tag "setting[message[#{locale.to_s}]]", Refinery::Workflows::Setting.confirmation_message, :rows => "7", :class => 'widest' %>
+        <br/>
+        <em><%= t('.note') %></em>
+      </td>
+    </tr>
+  </table>
+
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :cancel_url => refinery.workflows_admin_workflows_url,
+             :hide_delete => true %>
+<% end %>

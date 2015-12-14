@@ -1,0 +1,16 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>'>
+  <span class='title'>
+    <%= link_to workflow.name, refinery.workflows_admin_workflow_path(workflow) %> <%= t('.said') %>
+    <span class="preview"><%= truncate(strip_tags(sanitize(workflow.message)), :length => 60) -%></span>
+  </span>
+  <span class='actions'>
+    <%= link_to refinery_icon_tag('delete.png'), refinery.workflows_admin_workflow_path(workflow),
+                :class => "cancel confirm-delete",
+                :title => t('.delete_workflow'),
+                :'data-confirm' => t('shared.admin.delete.message', :title => workflow.name),
+                :'data-method' => "delete" -%>
+
+    <%= link_to refinery_icon_tag('zoom.png'), refinery.workflows_admin_workflow_path(workflow),
+                :title => t('.read_workflow') -%>
+  </span>
+</li>

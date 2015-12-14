@@ -1,0 +1,14 @@
+<%= t('.greeting') %>,<br/>
+<br/>
+<%= t('.you_recieved_new_workflow') %><br/>
+<br/>
+<%= t('.workflow_starts') %><br/>
+<br/>
+<%= t('.email', :default => t('activerecord.attributes.workflow.email')) %>: <%= @workflow.email %><br/>
+<br/>
+<%= t('.workflow_ends') %><br/>
+<br/>
+<%= t('.closing_line') %>,<br/>
+<%= Refinery::Core.site_name %><br/>
+<br/>
+<%= t('.ps_html') %>
