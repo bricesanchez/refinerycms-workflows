@@ -1,5 +1,5 @@
-require 'refinerycms-settings'
 require 'refinerycms-core'
+require 'refinerycms-settings'
 
 module Refinery
   module Workflows

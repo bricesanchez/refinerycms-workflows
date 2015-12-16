@@ -42,3 +42,5 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
 end
+
+gem 'globalize-versioning', github: 'globalize/globalize-versioning', branch: 'master'

@@ -1,37 +1,53 @@
 require 'workflow'
+require 'paper_trail'
 
 begin
-  Refinery::Page.class_eval do
-    include Workflow
+  module Refinery
+    Page.class_eval do
+      has_paper_trail
 
-    workflow do
-      state :new do
-        event :submit, :transitions_to => :awaiting_review
+      translates :title, :menu_title, :custom_slug, :slug, include: :seo_meta, versioning: :paper_trail
+
+      include Workflow
+
+      workflow do
+        state :new do
+          event :submit, :transitions_to => :awaiting_review
+        end
+
+        state :awaiting_review do
+          event :review, :transitions_to => :being_reviewed
+        end
+
+        state :being_reviewed do
+          event :accept, :transitions_to => :accepted
+          event :reject, :transitions_to => :rejected
+        end
+
+        state :accepted
+        state :rejected
       end
 
-      state :awaiting_review do
-        event :review, :transitions_to => :being_reviewed
+      def submit
+        begin
+          Refinery::PageMailer.notification(@page, request).deliver
+        rescue
+          logger.warn "There was an error delivering a submit notification:\n#{$!}\n"
+        end
       end
 
-      state :being_reviewed do
-        event :accept, :transitions_to => :accepted
-        event :reject, :transitions_to => :rejected
+      def accept
+        puts "Send confirmation to client"
+        puts "Publish page current version"
       end
 
-      state :accepted
-      state :rejected
-    end
+      def reject
+        puts "Sending email to the author explaining the reason..."
+      end
 
-    def submit
-      puts 'sending email to the moderator with the diff'
-    end
-
-    def reject
-      puts 'sending email to the author explaining the reason...'
-    end
-
-    def review(reviewer = '')
-      puts "[#{reviewer}] is now reviewing the article"
+      def review(reviewer = '')
+        puts "[#{reviewer}] is now reviewing the article"
+      end
     end
   end
 rescue NameError

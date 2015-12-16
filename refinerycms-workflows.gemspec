@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
   s.add_dependency    'actionmailer'
   s.add_dependency    'workflow', '>= 1.2.0'
   s.add_dependency    'decorators', '~> 2.0.0'
+  s.add_dependency    'paper_trail', '~> 4.0.0'
+  # s.add_dependency    'globalize-versioning', '~> 0.2.0'
 
   # Development dependencies (usually used for testing)
   s.add_development_dependency 'refinerycms-testing', '~> 3.0.0'
