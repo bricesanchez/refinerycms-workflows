@@ -4,7 +4,6 @@ module Refinery
     def rake_db
       rake "refinery_workflows:install:migrations"
       rake "refinery_settings:install:migrations"
-      generate "paper_trail:install"
     end
 
     def append_load_seed_data
