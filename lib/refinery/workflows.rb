@@ -1,5 +1,6 @@
 require 'refinerycms-core'
 require 'refinerycms-settings'
+require 'paper_trail'
 
 module Refinery
   module Workflows

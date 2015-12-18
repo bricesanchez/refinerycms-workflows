@@ -8,3 +8,6 @@
 
     # Sign up for a https://rubygems.org/ account and publish the gem
     gem push refinerycms-workflows.gem
+
+# http://samurails.com/gems/papertrail/
+# http://www.sitepoint.com/versioning-papertrail/
